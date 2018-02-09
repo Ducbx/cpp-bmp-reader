@@ -17,7 +17,9 @@ BMP::BMP(string filename)
 
 	// parse headers
 	fileHeader = FileHeader(rawFileHeader);
+	fileHeader.print();
 	imageHeader = ImageHeader(rawImageHeader);
+	imageHeader.print();
 
 	// crete raw pixel data buffer
 	input.seekg(0, ios::end);
@@ -70,11 +72,14 @@ void BMP::save(string filename) {
 	}
 
 	// pixels
+	int padding = 0;
+	if ((width * 3) % 4 != 0) {
+		padding = 4 - ((width * 3) % 4);
+	}
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
 			output << pixelMatrix[height - i - 1][j].b << pixelMatrix[height - i - 1][j].g << pixelMatrix[height - i - 1][j].r;
 		}
-		int padding = 4 - ((imageHeader.getBiWidth() * 3) % 4);
 		for (int j = 0; j < padding; j++) {
 			output << zero;
 		}

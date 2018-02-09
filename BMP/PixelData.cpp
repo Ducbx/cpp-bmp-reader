@@ -16,7 +16,10 @@ void PixelData::parseRawData(char* rawData, int width, int height, wchar_t depth
 		pixelMatrix[i] = new my::RGB[width];
 	}
 
-	int padding = 4 - ((width * 3) % 4);
+	int padding = 0;
+	if ((width * 3) % 4 != 0) {
+		padding = 4 - ((width * 3) % 4);
+	}
 	int offset = 0;
 
 	for (int i = 0; i < height; i++) {

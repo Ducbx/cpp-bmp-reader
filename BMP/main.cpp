@@ -41,6 +41,8 @@ int main() {
 	BMP bmp("E:\\bmp\\hamburger.bmp");
 	// BMP bmp("E:\\bmp\\tiger.bmp");
 	// BMP bmp("E:\\bmp\\sun.bmp");
+	// BMP bmp("E:\\bmp\\duck.bmp");
+	// BMP bmp("E:\\bmp\\lena.bmp");
 
 	// display the image
 	displayImage(&bmp);
