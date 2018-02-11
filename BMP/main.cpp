@@ -37,12 +37,19 @@ int main() {
 
 	cout << "CPP BMP READER" << endl;
 
+	// create BMP object
+	BMP bmp;
+
 	// read BMP image from file
-	BMP bmp("E:\\bmp\\hamburger.bmp");
-	// BMP bmp("E:\\bmp\\tiger.bmp");
-	// BMP bmp("E:\\bmp\\sun.bmp");
-	// BMP bmp("E:\\bmp\\duck.bmp");
-	// BMP bmp("E:\\bmp\\lena.bmp");
+	bool loaded = true;
+	loaded = bmp.load("E:\\bmp\\hamburger.bmp");
+
+	// check if file loaded successfully
+	if (!loaded) {
+		cout << "NOT BMP" << endl;
+		cin.get();
+		return -1;
+	}
 
 	// display the image
 	displayImage(&bmp);

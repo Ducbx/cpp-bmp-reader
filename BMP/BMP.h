@@ -20,8 +20,9 @@ private:
 	char rawImageHeader[IMAGE_HEADER_SIZE];
 	char* rawOffsetBytes;
 public:
-	BMP(string filename);
+	BMP();
 	~BMP();
+	bool load(string filename);
 	FileHeader* getFileHeader();
 	ImageHeader* getImageHeader();
 	PixelData* getPixelData();

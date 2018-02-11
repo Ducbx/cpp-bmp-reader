@@ -5,11 +5,29 @@
 #include "ImageHeader.h"
 #include "PixelData.h"
 
-BMP::BMP(string filename)
+BMP::BMP()
+{
+}
+
+
+BMP::~BMP()
+{
+}
+
+bool BMP::load(string filename)
 {
 
 	// open file
 	ifstream input(filename, ios::binary);
+
+	// check if valid BMP file
+	char BM[2];
+	input.read(BM, 2);
+	if (!(BM[0] == 'B' && BM[1] == 'M')) {
+		input.close();
+		return false;
+	}
+	input.seekg(0, ios::beg);
 
 	// read headers
 	input.read(rawFileHeader, FILE_HEADER_SIZE);
@@ -17,9 +35,7 @@ BMP::BMP(string filename)
 
 	// parse headers
 	fileHeader = FileHeader(rawFileHeader);
-	fileHeader.print();
 	imageHeader = ImageHeader(rawImageHeader);
-	imageHeader.print();
 
 	// crete raw pixel data buffer
 	input.seekg(0, ios::end);
@@ -41,11 +57,8 @@ BMP::BMP(string filename)
 	// close file
 	input.close();
 
-}
+	return true;
 
-
-BMP::~BMP()
-{
 }
 
 void BMP::save(string filename) {
